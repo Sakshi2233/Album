@@ -27,7 +27,7 @@ public class AlbumMenu {
                 System.out.println("Main Menu");
 
                 System.out.println(
-                        "1- Persist\n2- Find by Title\n3- List\n4- Find by Artist\n5- Find by Genre\n6- Update\n7- Delete");
+                        "1- add album\n2- Find by Title\n3- List\n4- Find by Artist\n5- Find by Genre\n6- Update\n7- Delete");
 
                 System.out.println("Enter Choice");
 
@@ -43,7 +43,12 @@ public class AlbumMenu {
 
                     case 2:
 
-                        findbytitle();
+					try {
+						findbytitle();
+					} catch (InvalidAlbumException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                         break;
                     case 3:
 
@@ -70,11 +75,16 @@ public class AlbumMenu {
 
                     case 7:
 
-                        delete();
+					try {
+						delete();
+					} catch (InvalidAlbumException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
                         break;
                     default:
-                        System.out.println("Check the choice again");
+                        System.out.println("Invalid Choice");
 
                 }
 
@@ -143,19 +153,12 @@ public class AlbumMenu {
 
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Enter Title: ");
-
             String title = sc.next();
-
             System.out.println("Enter Artist: ");
-
             String artist = sc.next();
-
             System.out.println("Enter Genre: ");
-
             String genre = sc.next();
-
             Album a = new Album(title, artist, genre);
-
             dao.persist(a);
         }
 
